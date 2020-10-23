@@ -1,0 +1,150 @@
+description:
+  A device has certain properties that describe its identity and location.
+  These properties are described inside this object.
+type: object
+properties:
+  purpose:
+    description:
+      An SSID can have a special purpose such as the hidden on-boarding BSS.
+      All purposes other than "user-defined" are static pre-defined configurations.
+    type: string
+    enum:
+    - user-defined
+    - onboarding-ap
+    - onboarding-sta
+    default: user-defined
+  name:
+    description:
+      The broadcasted SSID of the wireless network and for for managed mode
+      the SSID of the network you’re connecting to
+    type: string
+    maxLength: 32
+    minLength: 1
+  wifi-bands:
+    description:
+      The band that the SSID should be broadcasted on. The configuration layer
+      will use the first matching band.
+    type: array
+    items:
+      type: string
+      enum:
+      - 2G
+      - 5G
+      - 5G-lower
+      - 5G-upper
+      - 6G
+  bss-mode:
+    description:
+      Selects the operation mode of the wireless network interface controller.
+    type: string
+    enum:
+    - ap
+    - sta
+    - mesh
+    - wds-ap
+    - wds-sta
+    - wds-repeater
+    default: ap
+  bssid:
+    description:
+      Override the BSSID of the network, only applicable in adhoc or sta mode.
+    type: string
+    format: uc-mac
+  hidden-ssid:
+    description:
+      Disables the broadcasting of beacon frames if set to 1 and,in doing so,
+      hides the ESSID.
+    type: boolean
+  isolate-clients:
+    description:
+      Isolates wireless clients from each other on this BSS.
+    type: boolean
+  power-save:
+    description:
+      Unscheduled Automatic Power Save Delivery.
+    type: boolean
+  rts-threshold:
+    description:
+      Set the RTS/CTS threshold of the BSS.
+    type: integer
+    maximum: 65535
+    minimum: 1
+  broadcast-time:
+    description:
+      This option will make the unit braodcast the time inside its beacons.
+    type: boolean
+  unicast-conversion:
+    description:
+      Convert multicast traffic to unicast on this BSS.
+    type: boolean
+  services:
+    description:
+      The services that shall be offered on this logical interface. These are
+      just strings such as "wifi-steering"
+    type: array
+    items:
+      type: string
+      examples:
+      - wifi-steering
+  maximum-clients:
+    description:
+      Set the maximum number of clients that may connect to this VAP.
+    type: integer
+    example: 64
+  proxy-arp:
+    description:
+      Proxy ARP is the technique in which the host router, answers ARP requests
+      intended for another machine.
+    type: boolean
+    default: true
+  disassoc-low-ack:
+    decription:
+      Disassociate stations based on excessive transmission failures or other
+      indications of connection loss.
+    type: boolean
+    default: false
+  vendor-elements:
+    decription:
+      This option allows embedding custom vendor specific IEs inside the beacons of
+      a BSS in AP mode.
+    type: string
+  fils-discovery-interval:
+    description:
+      The maximum interval for FILS discovery announcement frames. This is a condensed
+      beacon used in 6GHz channels for passive BSS discovery.
+    type: integer
+    default: 20
+    maximum: 10000
+  encryption:
+    $ref: "https://urender.org/schema/v1/interface/ssid/encryption/"
+  multi-psk:
+    type: array
+    items:
+      $ref: "https://urender.org/schema/v1/interface/ssid/multi-psk/"
+  rrm:
+    $ref: "https://urender.org/schema/v1/interface/ssid/rrm/"
+  rate-limit:
+    $ref: "https://urender.org/schema/v1/interface/ssid/rate-limit/"
+  roaming:
+    $ref: "https://urender.org/schema/v1/interface/ssid/roaming/"
+  radius:
+    $ref: "https://urender.org/schema/v1/interface/ssid/radius/"
+  certificates:
+    $ref: "https://urender.org/schema/v1/interface/ssid/certificates/"
+  quality-thresholds:
+    $ref: "https://urender.org/schema/v1/interface/ssid/quality-thresholds/"
+  hostapd-bss-raw:
+    description:
+      This array allows passing raw hostapd.conf lines.
+    type: array
+    items:
+      type: string
+      examples:
+      - 'ap_table_expiration_time=3600'
+      - 'device_type=6-0050F204-1'
+      - 'ieee80211h=1'
+      - 'rssi_ignore_probe_request=-75'
+      - 'time_zone=EST5'
+      - 'uuid=12345678-9abc-def0-1234-56789abcdef0'
+      - 'venue_url=1:http://www.example.com/info-eng'
+      - 'wpa_deny_ptk0_rekey=0'

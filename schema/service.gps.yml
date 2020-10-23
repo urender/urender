@@ -1,0 +1,10 @@
+$module: urender-mod-gps
+description:
+  This section can be used to configure GPS support.
+type: object
+properties:
+  adjust-time:
+    description:
+      Adjust the systems clock upon a successful GPS lock.
+    type: boolean
+    default: false

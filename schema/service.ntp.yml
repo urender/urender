@@ -1,0 +1,20 @@
+type: object
+description:
+  This section can be used to setup the upstream NTP servers.
+properties:
+  servers:
+    description:
+      This is an array of URL/IP of the upstream NTP servers that the unit shall use to
+      acquire its current time.
+    type: array
+    items:
+      type: string
+      format: uc-host
+    examples:
+    - 0.openwrt.pool.ntp.org
+  local-server:
+    description:
+      Start a NTP server that provides the time to local clients.
+    type: boolean
+    examples:
+    - true

@@ -1,0 +1,5 @@
+$module: urender-mod-mdns
+description:
+  This section can be used to configure the MDNS server.
+type: object
+properties:

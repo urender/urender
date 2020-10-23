@@ -1,0 +1,37 @@
+description:
+  This section describes all of the services that may be present on the AP.
+  Each service is then referenced via its name inside an interface, ssid, ...
+type: object
+properties:
+  lldp:
+    $ref: "https://urender.org/schema/v1/service/lldp/"
+  ssh:
+    $ref: "https://urender.org/schema/v1/service/ssh/"
+  ntp:
+    $ref: "https://urender.org/schema/v1/service/ntp/"
+  mdns:
+    $ref: "https://urender.org/schema/v1/service/mdns/"
+  rtty:
+    $ref: "https://urender.org/schema/v1/service/rtty/"
+  log:
+    $ref: "https://urender.org/schema/v1/service/log/"
+  http:
+    $ref: "https://urender.org/schema/v1/service/http/"
+  igmp:
+    $ref: "https://urender.org/schema/v1/service/igmp/"
+  ieee8021x:
+    $ref: "https://urender.org/schema/v1/service/ieee8021x/"
+  online-check:
+    $ref: "https://urender.org/schema/v1/service/online-check/"
+  data-plane:
+    $ref: "https://urender.org/schema/v1/service/data-plane/"
+  wifi-steering:
+    $ref: "https://urender.org/schema/v1/service/wifi-steering/"
+  quality-of-service:
+    $ref: "https://urender.org/schema/v1/service/quality-of-service/"
+  airtime-fairness:
+    $ref: "https://urender.org/schema/v1/service/airtime-fairness/"
+  gps:
+    $ref: "https://urender.org/schema/v1/service/gps/"
+  unet:
+    $ref: "https://urender.org/schema/v1/service/unet/"

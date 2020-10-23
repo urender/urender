@@ -1,0 +1,16 @@
+description:
+  This Object defines the properties of a GRE tunnel.
+type: object
+properties:
+  proto:
+    description:
+      This field must be set to gre.
+    type: string
+    const: gre
+  peer-address:
+    description:
+      This is the IP address of the remote host, that the GRE tunnel shall be
+      established with.
+    type: string
+    format: ipv4
+    example: '192.168.100.1'

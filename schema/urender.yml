@@ -1,0 +1,29 @@
+$id: https://urender.org/urender.schema.json
+$schema: http://json-schema.org/draft-07/schema#
+description: OpenWrt uRender schema
+type: object
+properties:
+  uuid:
+    description:
+      The unique ID of the configuration. This is the unix timestamp of when the config was created.
+    type: integer
+  unit:
+    $ref: "https://urender.org/schema/v1/unit/"
+  globals:
+    $ref: "https://urender.org/schema/v1/globals/"
+  definitions:
+    $ref: "https://urender.org/schema/v1/definitions/"
+  switch:
+    $ref: "https://urender.org/schema/v1/switch/"
+  ethernet:
+    $ref: "https://urender.org/schema/v1/ethernet/"
+  radios:
+    type: array
+    items:
+      $ref: "https://urender.org/schema/v1/radio/"
+  interfaces:
+    type: array
+    items:
+      $ref: "https://urender.org/schema/v1/interface/"
+  services:
+    $ref: "https://urender.org/schema/v1/service/"

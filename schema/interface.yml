@@ -1,0 +1,75 @@
+description:
+  This section describes the logical network interfaces of the device.
+  Interfaces as their primary have a role that is upstream, downstream,
+  guest, ....
+type: object
+properties:
+  name:
+    description:
+      This is a free text field, stating the administrative name of the
+      interface. It may contain spaces and special characters.
+    type: string
+    examples:
+    - LAN
+  role:
+    description:
+      The role defines if the interface is upstream or downstream facing.
+    type: string
+    enum:
+    - upstream
+    - downstream
+  select-upstream:
+    description:
+      Any downstream interface can be masquaraded to an upstream interface. The default
+      is that an upstream interface with a matching VLAN is selected. If the downstream
+      interface has no vlan, the default upstream is used. This option provides the
+      ability to override this selection.
+    type: string
+    enum:
+    - match-vlan
+    - default
+    - none
+    default: match-vlan
+  isolate-hosts:
+    description:
+      This option makes sure that any traffic leaving this interface is isolated
+      and all local IP ranges are blocked. It essentially enforces "guest network"
+      firewall settings.
+    type: boolean
+  metric:
+    description:
+      The routing metric of this logical interface. Lower values have higher
+      priority.
+    type: integer
+    maximum: 4294967295
+    minimum: 0
+  services:
+    description:
+      The services that shall be offered on this logical interface. These are
+      just strings such as "ssh", "lldp", "mdns"
+    type: array
+    items:
+      type: string
+      examples:
+      - ssh
+      - lldp
+  vlan:
+    $ref: "https://urender.org/schema/v1/interface/vlan/"
+  bridge:
+    $ref: "https://urender.org/schema/v1/interface/bridge/"
+  ethernet:
+    type: array
+    items:
+      $ref: "https://urender.org/schema/v1/interface/ethernet/"
+  ipv4:
+    $ref: "https://urender.org/schema/v1/interface/ipv4/"
+  ipv6:
+    $ref: "https://urender.org/schema/v1/interface/ipv6/"
+  broad-band:
+    $ref: "https://urender.org/schema/v1/interface/broad-band/"
+  ssids:
+    type: array
+    items:
+      $ref: "https://urender.org/schema/v1/interface/ssid/"
+  tunnel:
+    $ref: "https://urender.org/schema/v1/interface/tunnel/"

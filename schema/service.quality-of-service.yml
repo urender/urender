@@ -1,0 +1,106 @@
+$module: urender-mod-qos
+description:
+  This section describes the QoS behaviour of the unit.
+type: object
+properties:
+  select-ports:
+    description:
+      The physical network devices that shall be considered the primary uplink interface.
+      All classification and shaping will happen on this device.
+    type: array
+    items:
+      type: string
+      default: WAN
+  bandwidth-up:
+    description:
+      Defines the upload bandwidth of this device. If it is not known or the device is
+      attached to a shared medium, this value needs to be 0.
+    type: integer
+    default: 0
+  bandwidth-down:
+    description:
+      Defines the download bandwidth of this device. If it is not known or the device is
+      attached to a shared medium, this value needs to be 0.
+    type: integer
+    default: 0
+  bulk-detection:
+    description:
+      The QoS feature can automatically detect and classify bulk flows. This is based on average
+      packet size and PPS.
+    type: object
+    properties:
+      dscp:
+        description:
+          The differentiated services code point that shall be assigned to packets that belong
+          to a bulk flow.
+        $ref: 'https://urender.org/schema/v1/service/quality-of-service/class-selector/'
+        default: CS0
+      packets-per-second:
+        description:
+          The required PPS rate that will cause a flow to be classified as bulk.
+        type: number
+        default: 0
+  classifier:
+    description:
+      A list of classifiers. Each classifier will map certain traffic to specific ToS/DSCP
+      values based upon the defined constraints.
+    type: array
+    items:
+      type: object
+      properties:
+        dscp:
+          description:
+            The differentiated services code point that shall be assigned to packet that match
+            the rules of this entry.
+          $ref: 'https://urender.org/schema/v1/service/quality-of-service/class-selector/'
+          default: CS1
+        ports:
+          description:
+            Each entry defines a layer3 protocol and a port(range) that will be used to match packets.
+          type: array
+          items:
+            type: object
+            properties:
+              protocol:
+                description:
+                  The port match can apply for TCP, UDP or any IP protocol.
+                type: string
+                enum:
+                - any
+                - tcp
+                - udp
+                default: any
+              port:
+                description:
+                  The port of this match rule.
+                type: integer
+              range-end:
+                description:
+                  The last port of this match rule if it is a port range.
+                type: integer
+              reclassify:
+                description:
+                  Ignore the ToS/DSCP of packets and reclassify them.
+                type: boolean
+                default: true
+        dns:
+          description:
+            Each entry defines a wildcard FQDN. The IP that this resolves to will be used to match packets.
+          type: array
+          items:
+            type: object
+            properties:
+              fqdn:
+                type: string
+                format: uc-fqdn
+              suffix-matching:
+                description:
+                  Match for all suffixes of the FQDN.
+                type: boolean
+                default: true
+              reclassify:
+                description:
+                  Ignore the ToS/DSCP of packets and reclassify them.
+                type: boolean
+                default: true
+

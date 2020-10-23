@@ -1,0 +1,13 @@
+$module: urender-mod-lldp
+type: object
+properties:
+  describe:
+    description:
+      The LLDP description field. If set to "auto" it will be derived from unit.name.
+    type: string
+    default: OpenWrt Access Point
+  location:
+    description:
+      The LLDP location field. If set to "auto" it will be derived from unit.location.
+    type: string
+    default: OpenWrt Network

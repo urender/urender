@@ -1,0 +1,3 @@
+oneOf:
+ - $ref: 'https://urender.org/schema/v1/interface/broad-band/wwan/'
+ - $ref: 'https://urender.org/schema/v1/interface/broad-band/pppoe/'
