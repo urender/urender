@@ -493,6 +493,8 @@ let GeneratorProto = {
 	{
 		let variantSpecs, variantErrorCond, variantErrorMsg;
 
+		this.emit_required_packages_check(indent, valueSpec);
+
 		if (type(valueSpec.anyOf) == "array" && length(valueSpec.anyOf) > 0) {
 			variantSpecs = valueSpec.anyOf;
 			variantErrorCond = '== 0';
@@ -547,7 +549,6 @@ let GeneratorProto = {
 		this.emit_array_tests(indent, valueExpr, valueSpec);
 		this.emit_object_tests(indent, valueExpr, valueSpec);
 		this.emit_generic_tests(indent, valueExpr, valueSpec);
-		this.emit_required_packages_check(indent, valueSpec);
 	},
 
 	emit_format_validation_function: function(indent, verb, formatName, formatCode)
