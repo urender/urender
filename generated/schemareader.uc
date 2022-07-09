@@ -3204,8 +3204,8 @@ function instantiateInterfaceSsid(location, value, errors) {
 	return value;
 }
 
-function instantiateInterfaceTunnelMesh(location, value, errors) {
-	for (let require in [ "kmod-batman-adv2" ])
+function instantiateInterfaceTunnelMeshBatman(location, value, errors) {
+	for (let require in [ "kmod-batman-adv" ])
 		if (!length(fs.glob("/usr/lib/opkg/info/" + require + ".control")))
 			push(errors, [ location, "is missing system dependency: " + require]);
 	if (type(value) == "object") {
@@ -3215,8 +3215,8 @@ function instantiateInterfaceTunnelMesh(location, value, errors) {
 			if (type(value) != "string")
 				push(errors, [ location, "must be of type string" ]);
 
-			if (value != "mesh")
-				push(errors, [ location, "must have value \"mesh\"" ]);
+			if (value != "mesh-batman")
+				push(errors, [ location, "must have value \"mesh-batman\"" ]);
 
 			return value;
 		}
@@ -3235,7 +3235,7 @@ function instantiateInterfaceTunnelMesh(location, value, errors) {
 }
 
 function instantiateInterfaceTunnelVxlan(location, value, errors) {
-	for (let require in [ "kmod-vxlan2" ])
+	for (let require in [ "kmod-vxlan" ])
 		if (!length(fs.glob("/usr/lib/opkg/info/" + require + ".control")))
 			push(errors, [ location, "is missing system dependency: " + require]);
 	if (type(value) == "object") {
@@ -3368,6 +3368,9 @@ function instantiateInterfaceTunnelL2tp(location, value, errors) {
 }
 
 function instantiateInterfaceTunnelGre(location, value, errors) {
+	for (let require in [ "kmod-gre", "kmod-gre6" ])
+		if (!length(fs.glob("/usr/lib/opkg/info/" + require + ".control")))
+			push(errors, [ location, "is missing system dependency: " + require]);
 	if (type(value) == "object") {
 		let obj = {};
 
@@ -3413,7 +3416,7 @@ function instantiateInterfaceTunnelGre(location, value, errors) {
 
 function instantiateInterfaceTunnel(location, value, errors) {
 	function parseVariant0(location, value, errors) {
-		value = instantiateInterfaceTunnelMesh(location, value, errors);
+		value = instantiateInterfaceTunnelMeshBatman(location, value, errors);
 
 		return value;
 	}

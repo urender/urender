@@ -1,5 +1,5 @@
 $require:
-- kmod-batman-adv2
+- kmod-batman-adv
 description:
   This Object defines the properties of a mesh interface overlay.
 type: object
@@ -8,4 +8,4 @@ properties:
     description:
       This field must be set to mesh.
     type: string
-    const: mesh
+    const: mesh-batman

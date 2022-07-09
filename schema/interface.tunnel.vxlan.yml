@@ -1,5 +1,5 @@
 $require:
-- kmod-vxlan2
+- kmod-vxlan
 description:
   This Object defines the properties of a vxlan tunnel.
 type: object

@@ -1,3 +1,6 @@
+$require:
+- kmod-gre
+- kmod-gre6
 description:
   This Object defines the properties of a GRE tunnel.
 type: object

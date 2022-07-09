@@ -1,5 +1,5 @@
 oneOf:
- - $ref: 'https://urender.org/schema/v1/interface/tunnel/mesh/'
+ - $ref: 'https://urender.org/schema/v1/interface/tunnel/mesh-batman/'
  - $ref: 'https://urender.org/schema/v1/interface/tunnel/vxlan/'
  - $ref: 'https://urender.org/schema/v1/interface/tunnel/l2tp/'
  - $ref: 'https://urender.org/schema/v1/interface/tunnel/gre/'
