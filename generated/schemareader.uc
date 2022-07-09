@@ -3235,6 +3235,9 @@ function instantiateInterfaceTunnelMesh(location, value, errors) {
 }
 
 function instantiateInterfaceTunnelVxlan(location, value, errors) {
+	for (let require in [ "kmod-vxlan2" ])
+		if (!length(fs.glob("/usr/lib/opkg/info/" + require + ".control")))
+			push(errors, [ location, "is missing system dependency: " + require]);
 	if (type(value) == "object") {
 		let obj = {};
 
