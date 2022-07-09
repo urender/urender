@@ -3205,6 +3205,9 @@ function instantiateInterfaceSsid(location, value, errors) {
 }
 
 function instantiateInterfaceTunnelMesh(location, value, errors) {
+	for (let require in [ "kmod-batman-adv2" ])
+		if (!length(fs.glob("/usr/lib/opkg/info/" + require + ".control")))
+			push(errors, [ location, "is missing system dependency: " + require]);
 	if (type(value) == "object") {
 		let obj = {};
 
@@ -3228,9 +3231,6 @@ function instantiateInterfaceTunnelMesh(location, value, errors) {
 	if (type(value) != "object")
 		push(errors, [ location, "must be of type object" ]);
 
-	for (let require in [ "kmod-batman-adv2" ])
-		if (!length(fs.glob("/usr/lib/opkg/info/" + require + ".control")))
-			push(errors, [ location, "is missing system dependency: " + require]);
 	return value;
 }
 
