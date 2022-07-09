@@ -485,8 +485,8 @@ let GeneratorProto = {
 			return;
 
 		this.print(indent, 'for (let require in %J)', required);
-		this.print(indent, '	if (!fs.glob("/usr/lib/opkg/info/" + require + ".control"))');
-		this.print(indent, '		push(errors, [ location, "is missing system dependency: %%s", require]);');
+		this.print(indent, '	if (!length(fs.glob("/usr/lib/opkg/info/" + require + ".control")))');
+		this.print(indent, '		push(errors, [ location, "is missing system dependency: " + require]);');
 	},
 
 	emit_spec_validation_tests: function(indent, valueExpr, valueSpec)

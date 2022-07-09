@@ -3229,8 +3229,8 @@ function instantiateInterfaceTunnelMesh(location, value, errors) {
 		push(errors, [ location, "must be of type object" ]);
 
 	for (let require in [ "kmod-batman-adv2" ])
-		if (!fs.glob("/usr/lib/opkg/info/" + require + ".control"))
-			push(errors, [ location, "is missing system dependency: %s", require]);
+		if (!length(fs.glob("/usr/lib/opkg/info/" + require + ".control")))
+			push(errors, [ location, "is missing system dependency: " + require]);
 	return value;
 }
 
