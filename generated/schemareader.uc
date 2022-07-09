@@ -458,28 +458,6 @@ function instantiateEthernet(location, value, errors) {
 					obj.duplex = parseDuplex(location + "/duplex", value["duplex"], errors);
 				}
 
-				function parseServices(location, value, errors) {
-					if (type(value) == "array") {
-						function parseItem(location, value, errors) {
-							if (type(value) != "string")
-								push(errors, [ location, "must be of type string" ]);
-
-							return value;
-						}
-
-						return map(value, (item, i) => parseItem(location + "/" + i, item, errors));
-					}
-
-					if (type(value) != "array")
-						push(errors, [ location, "must be of type array" ]);
-
-					return value;
-				}
-
-				if (exists(value, "services")) {
-					obj.services = parseServices(location + "/services", value["services"], errors);
-				}
-
 				return obj;
 			}
 
@@ -3250,6 +3228,9 @@ function instantiateInterfaceTunnelMesh(location, value, errors) {
 	if (type(value) != "object")
 		push(errors, [ location, "must be of type object" ]);
 
+	for (let require in [ "kmod-batman-adv2" ])
+		if (!fs.glob("/usr/lib/opkg/info/" + require + ".control"))
+			push(errors, [ location, "is missing system dependency: %s", require]);
 	return value;
 }
 

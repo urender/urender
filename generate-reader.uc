@@ -477,6 +477,18 @@ let GeneratorProto = {
 		this.output.write("\n");
 	},
 
+	emit_required_packages_check: function(indent, valueSpec)
+	{
+		let required = valueSpec['$require'];
+
+		if (type(required) != 'array')
+			return;
+
+		this.print(indent, 'for (let require in %J)', required);
+		this.print(indent, '	if (!fs.glob("/usr/lib/opkg/info/" + require + ".control"))');
+		this.print(indent, '		push(errors, [ location, "is missing system dependency: %%s", require]);');
+	},
+
 	emit_spec_validation_tests: function(indent, valueExpr, valueSpec)
 	{
 		let variantSpecs, variantErrorCond, variantErrorMsg;
@@ -535,6 +547,7 @@ let GeneratorProto = {
 		this.emit_array_tests(indent, valueExpr, valueSpec);
 		this.emit_object_tests(indent, valueExpr, valueSpec);
 		this.emit_generic_tests(indent, valueExpr, valueSpec);
+		this.emit_required_packages_check(indent, valueSpec);
 	},
 
 	emit_format_validation_function: function(indent, verb, formatName, formatCode)

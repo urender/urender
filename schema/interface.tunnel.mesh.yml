@@ -1,3 +1,5 @@
+$require:
+- kmod-batman-adv2
 description:
   This Object defines the properties of a mesh interface overlay.
 type: object
